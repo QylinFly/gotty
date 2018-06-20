@@ -36,9 +36,14 @@ func NewFactory(command string, argv []string, options *Options) (*Factory, erro
 func (factory *Factory) Name() string {
 	return "local command"
 }
+// 增加命令和参数动态设置
 func (factory *Factory) Command(cmd string)  {
 	factory.command = cmd
 }
+func (factory *Factory) Argv(argv []string)  {
+	factory.argv = argv
+}
+
 func (factory *Factory) New(params map[string][]string) (server.Slave, error) {
 	argv := make([]string, len(factory.argv))
 	copy(argv, factory.argv)

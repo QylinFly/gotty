@@ -13,6 +13,9 @@ type Slave interface {
 
 type Factory interface {
 	Name() string
+	// 命令和参数配置
 	Command(cmd string) 
+	Argv(argv []string) 
+	
 	New(params map[string][]string) (Slave, error)
 }

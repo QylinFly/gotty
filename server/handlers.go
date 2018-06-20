@@ -3,6 +3,7 @@ package server
 import (
 	"bytes"
 	"context"
+	"strings"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -37,7 +38,7 @@ func (server *Server) generateHandleWS(ctx context.Context, cancel context.Cance
 		}
 
 		
-		log.Printf("FormValue = " + r.FormValue("name"))
+		log.Printf("FormValue cmd = " + r.FormValue("cmd"))
 
 		num := counter.add(1)
 		closeReason := "unknown reason"
@@ -74,7 +75,15 @@ func (server *Server) generateHandleWS(ctx context.Context, cancel context.Cance
 			return
 		}
 		defer conn.Close()
-		server.factory.Command(r.FormValue("name"))
+
+		// 动态设置参数
+		argsStr := r.FormValue("cmd")
+		args := strings.Split(argsStr, " ")
+		server.factory.Command(args[0])
+		if len(args) >1{
+			server.factory.Argv(args[1:])
+		}
+
 		err = server.processWSConn(ctx, conn)
 
 		switch err {
