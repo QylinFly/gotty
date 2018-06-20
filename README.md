@@ -1,3 +1,9 @@
+# 参数外化处理（用于在 url 参数中执行命令）
+
+    例如：
+    http://127.0.0.1:8080/?cmd=top
+    http://127.0.0.1:8080/?cmd=top -h
+
 # ![](https://raw.githubusercontent.com/yudai/gotty/master/resources/favicon.png) GoTTY - Share your terminal as a web application
 
 [![GitHub release](http://img.shields.io/github/release/yudai/gotty.svg?style=flat-square)][release]
@@ -102,7 +108,7 @@ By default, GoTTY doesn't allow clients to send any keystrokes or commands excep
 
 To restrict client access, you can use the `-c` option to enable the basic authentication. With this option, clients need to input the specified username and password to connect to the GoTTY server. Note that the credentical will be transmitted between the server and clients in plain text. For more strict authentication, consider the SSL/TLS client certificate authentication described below.
 
-The `-r` option is a little bit casualer way to restrict access. With this option, GoTTY generates a random URL so that only people who know the URL can get access to the server.  
+The `-r` option is a little bit casualer way to restrict access. With this option, GoTTY generates a random URL so that only people who know the URL can get access to the server.
 
 All traffic between the server and clients are NOT encrypted by default. When you send secret information through GoTTY, we strongly recommend you use the `-t` option which enables TLS/SSL on the session. By default, GoTTY loads the crt and key files placed at `~/.gotty.crt` and `~/.gotty.key`. You can overwrite these file paths with the `--tls-crt` and `--tls-key` options. When you need to generate a self-signed certification file, you can use the `openssl` command.
 
@@ -172,19 +178,19 @@ GoTTY uses [xterm.js](https://xtermjs.org/) and [hterm](https://groups.google.co
 
 ### Command line client
 
-* [gotty-client](https://github.com/moul/gotty-client): If you want to connect to GoTTY server from your terminal
+- [gotty-client](https://github.com/moul/gotty-client): If you want to connect to GoTTY server from your terminal
 
 ### Terminal/SSH on Web Browsers
 
-* [Secure Shell (Chrome App)](https://chrome.google.com/webstore/detail/secure-shell/pnhechapfaindjhompbnflcldabbghjo): If you are a chrome user and need a "real" SSH client on your web browser, perhaps the Secure Shell app is what you want
-* [Wetty](https://github.com/krishnasrinivas/wetty): Node based web terminal (SSH/login)
-* [ttyd](https://tsl0922.github.io/ttyd): C port of GoTTY with CJK and IME support
+- [Secure Shell (Chrome App)](https://chrome.google.com/webstore/detail/secure-shell/pnhechapfaindjhompbnflcldabbghjo): If you are a chrome user and need a "real" SSH client on your web browser, perhaps the Secure Shell app is what you want
+- [Wetty](https://github.com/krishnasrinivas/wetty): Node based web terminal (SSH/login)
+- [ttyd](https://tsl0922.github.io/ttyd): C port of GoTTY with CJK and IME support
 
 ### Terminal Sharing
 
-* [tmate](http://tmate.io/): Forked-Tmux based Terminal-Terminal sharing
-* [termshare](https://termsha.re): Terminal-Terminal sharing through a HTTP server
-* [tmux](https://tmux.github.io/): Tmux itself also supports TTY sharing through SSH)
+- [tmate](http://tmate.io/): Forked-Tmux based Terminal-Terminal sharing
+- [termshare](https://termsha.re): Terminal-Terminal sharing through a HTTP server
+- [tmux](https://tmux.github.io/): Tmux itself also supports TTY sharing through SSH)
 
 # License
 
