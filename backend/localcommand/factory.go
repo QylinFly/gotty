@@ -15,6 +15,9 @@ type Options struct {
 type Factory struct {
 	command string
 	argv    []string
+	defaultCommand string
+	defaultArgv    []string
+
 	options *Options
 	opts    []Option
 }
@@ -28,6 +31,8 @@ func NewFactory(command string, argv []string, options *Options) (*Factory, erro
 	return &Factory{
 		command: command,
 		argv:    argv,
+		defaultCommand: command,
+		defaultArgv:    argv,
 		options: options,
 		opts:    opts,
 	}, nil
@@ -39,12 +44,20 @@ func (factory *Factory) Name() string {
 // 增加命令和参数动态设置
 func (factory *Factory) Command(cmd string)  {
 	factory.command = cmd
+	// 增加默认处理
+	if cmd == "" {
+		factory.command = factory.defaultCommand
+	}
+	if cmd == "" {
+		factory.argv = factory.defaultArgv
+	}
 }
 func (factory *Factory) Argv(argv []string)  {
 	factory.argv = argv
 }
 
 func (factory *Factory) New(params map[string][]string) (server.Slave, error) {
+	// ？---
 	argv := make([]string, len(factory.argv))
 	copy(argv, factory.argv)
 	if params["arg"] != nil && len(params["arg"]) > 0 {

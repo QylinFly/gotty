@@ -82,6 +82,9 @@ func (server *Server) generateHandleWS(ctx context.Context, cancel context.Cance
 		server.factory.Command(args[0])
 		if len(args) >1{
 			server.factory.Argv(args[1:])
+		}else{
+			// 没有参数就清空
+			server.factory.Argv(args[0:0])
 		}
 
 		err = server.processWSConn(ctx, conn)
